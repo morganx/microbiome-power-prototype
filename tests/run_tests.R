@@ -42,3 +42,7 @@ x<-matrix(0,3,10);rownames(x)<-c("at_80","below_80","other");x[3,]<-1;x[1,1:8]<-
 f<-filter_features(x,"EC")
 stopifnot(f$details$retained[1],!f$details$retained[2],all(f$details$abundance_pass))
 cat("PASS: EC 80% boundary and no abundance threshold.\n")
+v<-t[t$key=='Vaginal SGB',];vtext<-training_grant_intro(v)
+etext<-training_grant_intro(t[t$key=='Stool EC',])
+stopifnot(grepl('233 vaginal metagenomes',vtext,fixed=TRUE),grepl('543 detected features',vtext,fixed=TRUE),grepl('retaining 31 features',vtext,fixed=TRUE),grepl('MetaPhlAn 4.0.6',vtext,fixed=TRUE),grepl('among positive samples',vtext,fixed=TRUE),grepl('547 stool metagenomes',etext,fixed=TRUE),grepl('2487 detected unstratified EC features',etext,fixed=TRUE),grepl('retaining 1017 features',etext,fixed=TRUE),grepl('HUMAnN 4',etext,fixed=TRUE),grepl('at least 80%',etext,fixed=TRUE),!grepl('0.01%',etext,fixed=TRUE),!grepl('MetaPhlAn',etext,fixed=TRUE))
+cat('PASS: dataset-specific grant prose, profiling methods, and filters.\n')

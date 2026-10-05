@@ -10,9 +10,7 @@ make_case_control_grant_text <- function(t,s,target,features,tests_per_feature,f
   qs<-as.numeric(t[1,c("sd_25","sd_50","sd_75")]);sd<-qs[index]
   delta<-do.call(case_control_detectable,c(list(feature_sd=sd,target=target),s))
   example<-case_control_abundance_example(delta)
-  type<-if(grepl("ECs",t$dataset,fixed=TRUE))"enzyme-function (EC)" else "taxonomic"
-  source<-sprintf("%d %s profiles from the expanded Human Microbiome Project (Lloyd-Price et al.; PMID: 28953883)",t$samples,t$dataset)
-  intro<-sprintf("Using variability estimated from %s, we evaluated %s features. %s The 25th, 50th and 75th percentiles of retained feature SDs were %s on the arcsine-square-root relative-abundance scale, calculated among positive samples.",source,type,t$definition,paste(sprintf("%.5g",qs),collapse=", "))
+  intro<-training_grant_intro(t)
   design<-sprintf("For a cross-sectional comparison of %d independent cases and %d independent controls, a two-sided two-sample t test with Bonferroni correction across %d features and %d test%s per feature (family-wise alpha %.3g; per-test alpha %.6g)",s$cases,s$controls,features,tests_per_feature,if(tests_per_feature==1)"" else "s",family_alpha,s$alpha)
   percentile<-c("25th","50th (median)","75th")[index]
   effect<-sprintf("%s has an estimated %.0f%% power to detect a difference between group means of %.5f on the transformed scale, assuming a common within-group SD of %.5f corresponding to the %s percentile of training feature SDs.",design,100*target,delta,sd,percentile)

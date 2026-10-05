@@ -5,9 +5,7 @@ make_regression_grant_text <- function(t, s, target, features, analyses, family_
     is.finite(reference_percent), reference_percent > 0, reference_percent < 100)
   beta <- do.call(analysis_detectable, c(list(feature_sd = t$sd_75, target = target), s))
   type <- if (grepl("ECs",t$dataset)) "EC" else "taxonomic"
-  provenance <- sprintf("%d %s profiles from the expanded Human Microbiome Project (Lloyd-Price et al.; PMID: 28953883)", t$samples, t$dataset)
-  qs <- paste(sprintf("%.4g",as.numeric(t[1,c("sd_25","sd_50","sd_75")])),collapse=", ")
-  intro <- sprintf("Using variability estimated from %s, we evaluated %s features. %s The 25th, 50th, and 75th percentiles of retained feature SDs were %s on the arcsine-square-root abundance scale, calculated among positive samples.", provenance,type,t$definition,qs)
+  intro <- training_grant_intro(t)
   design <- if (mode == "cross") sprintf("In a cross-sectional analysis of %s participants, adjusting for %s (%s covariate coefficients)",s$n,covariate_names,s$covariates) else
     sprintf("In a longitudinal analysis of %s participants measured at two visits (%s observations), using a linear mixed model adjusted for %s and time with a participant-specific random intercept to account for repeated measurements",s$n,2*s$n,covariate_names)
   correction <- sprintf("Bonferroni correction across %s features and %s test%s per feature (family-wise significance level %s)",
