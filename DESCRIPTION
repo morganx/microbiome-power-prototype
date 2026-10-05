@@ -1,0 +1,9 @@
+Package: powerPrototype
+Type: Project
+Title: HMP-Based Microbiome Power Planning Prototypes
+Version: 0.1.0
+Description: Case-control and continuous-outcome power planning using HMP1-II reference variability.
+Depends: R (>= 4.5.0)
+Imports: shiny, pwr
+Encoding: UTF-8
+License: See docs/PROVENANCE.md

@@ -1,0 +1,8 @@
+data/extracted/
+.Rhistory
+.RData
+.Ruserdata
+.Rproj.user/
+.DS_Store
+*.log
+.local-lib/

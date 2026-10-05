@@ -1,0 +1,20 @@
+[
+  {
+    "archive": "data/raw/all_tsv.tsv.zip",
+    "archive_sha256": "ae9ee8dfb9cf9f15da8e939f3a0231768851f21ed79c4de84e3d405e9e1d0c2e",
+    "member": "hmp12_data/all_tsv.tsv",
+    "sha256": "b0a6cdde8fdd303876cdbd64154f65267a03dbefb9673787127fad62970b27a7"
+  },
+  {
+    "archive": "data/raw/hmp1-II_public_metadata.tsv.zip",
+    "archive_sha256": "fe7b4a746aac67bbb34720c69007c35b5a527b6987186f49a739e95ea90b33e2",
+    "member": "hmp12_data/hmp1-II_public_metadata.tsv",
+    "sha256": "f2be8fbc6a4e31124c9269d6c3402462417e12c1faef7bd4f4c01721564e916f"
+  },
+  {
+    "archive": "data/raw/ecs_relab.tsv.zip",
+    "archive_sha256": "739d1cee6f1bd22a20b5d35e76067f3140efbdc306fb99be8337971668ed5876",
+    "member": "hmp12_data/ecs_relab.tsv",
+    "sha256": "926b1bf8fa83796c956650dff54724e26173da61b9b9ad240af989f243b25e3c"
+  }
+]
