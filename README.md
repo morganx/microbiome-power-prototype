@@ -113,3 +113,7 @@ Rscript tests/run_tests.R
 ```
 
 See [methods](docs/METHODS.md) and [validation](docs/VALIDATION.md) for calculation details and test coverage.
+
+## Research-use disclaimer
+
+**Research prototype—not a validated statistical product.** These tools are under active development and may contain errors. Power estimates depend on the selected reference data and modeling assumptions and may not generalize to a particular study. Users are responsible for independently verifying calculations, assessing whether the methods suit their study, and interpreting the results. The software is provided “as is,” without warranty; its use does not imply endorsement of any study design or conclusions.
