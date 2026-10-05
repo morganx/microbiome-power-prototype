@@ -27,13 +27,18 @@ shiny::testServer(e$server,{
 })
 
 
-stopifnot(identical(t$key,c("Stool EC","Stool SGB","Oral SGB","Skin SGB","Vaginal SGB")),all(t$input_features==t$class_features+t$excluded),all(grepl("0.01%",t$definition,fixed=TRUE)))
+stopifnot(identical(t$key,c("Stool EC","Stool SGB","Oral SGB","Skin SGB","Vaginal SGB")),all(t$input_features==t$class_features+t$excluded),all(grepl("0.01%",t$definition[t$key!="Stool EC"],fixed=TRUE)),grepl("≥80%",t$definition[t$key=="Stool EC"],fixed=TRUE))
 source("scripts/calculate_training.R")
 x<-matrix(c(.0001,.000100001,.999799999),3,10)
 rownames(x)<-c("at_threshold","above_threshold","other")
-f<-filter_features(x,"EC")
+f<-filter_features(x,"SGB")
 stopifnot(!f$details$retained[1],f$details$retained[2])
 x<-matrix(0,2,10);rownames(x)<-c("at_prevalence_threshold","other");x[2,]<-1;x[1,1]<-.01
 stopifnot(filter_features(x,"SGB")$details$retained[1])
 
 cat('PASS: both applets, five reference choices, numerical power checks, filter thresholds, and count reconciliation.\n')
+
+x<-matrix(0,3,10);rownames(x)<-c("at_80","below_80","other");x[3,]<-1;x[1,1:8]<-1e-8;x[2,1:7]<-1e-8
+f<-filter_features(x,"EC")
+stopifnot(f$details$retained[1],!f$details$retained[2],all(f$details$abundance_pass))
+cat("PASS: EC 80% boundary and no abundance threshold.\n")

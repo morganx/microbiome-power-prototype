@@ -18,8 +18,9 @@ filter_features <- function(matrix_data, feature_type) {
   prevalence <- positive_n / ncol(normalized)
   nonzero_mean <- rowSums(normalized) / positive_n
   nonzero_mean[positive_n == 0] <- NA_real_
-  prevalence_pass <- prevalence >= 0.10
-  abundance_pass <- !is.na(nonzero_mean) & strictly_above(nonzero_mean, 0.0001)
+  prevalence_pass <- prevalence >= if (feature_type == "EC") 0.80 else 0.10
+  abundance_pass <- if (feature_type == "EC") rep(TRUE, nrow(normalized)) else
+    !is.na(nonzero_mean) & strictly_above(nonzero_mean, 0.0001)
   retained <- prevalence_pass & abundance_pass
   list(normalized = normalized, details = data.frame(
     feature = rownames(matrix_data), positive_samples = positive_n,

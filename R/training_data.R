@@ -6,5 +6,5 @@ load_applet_training <- function() {
     total_features=t$retained_features,class_features=t$retained_features,
     input_features=t$observed_features,sd_25=t$sd_25,sd_50=t$sd_50,sd_75=t$sd_75,
     key=unname(labels),excluded=t$excluded_observed_features,
-    definition=sprintf("Of %d detected features, %d were retained using prevalence ≥10%% and mean relative abundance >0.01%% among positive samples. These filters reduce the feature set for linear modeling. Excluded features are omitted from the SD distribution and default testing family.", t$observed_features,t$retained_features))
+    definition=sprintf("Of %d detected features, %d were retained using %s. These filters reduce the feature set for linear modeling. Excluded features are omitted from the SD distribution and default testing family.", t$observed_features,t$retained_features, ifelse(t$feature_type=="EC", "detection in ≥80% of samples, with no abundance threshold", "prevalence ≥10% and mean relative abundance >0.01% among positive samples")))
 }
