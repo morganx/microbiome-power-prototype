@@ -6,4 +6,4 @@ The three supplied HMP1-II inputs are taxonomic relative-abundance profiles, EC 
 
 The exact upstream download URLs and redistribution terms of these supplied processed files have not been established. No new license or ownership claim is applied to third-party data. This prototype does not assign a software license; select one before offering licensed reuse.
 
-The implementation originated from a locally developed power-planning workflow informed by the BioBakery power app (https://biobakery.shinyapps.io/power/). Numerical methods, filters, and limitations are described in METHODS.md. This repository is a fresh export and does not include prior project history.
+The implementation originated from an internally-developed power-planning app. Numerical methods, filters, and limitations are described in METHODS.md. This repository is a fresh export and does not include prior project history.
