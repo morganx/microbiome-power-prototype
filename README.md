@@ -10,6 +10,10 @@ For a specified sample size and target power, the applets estimate the minimum d
 
 To make transformed effect sizes easier to interpret, the applets provide illustrative relative-abundance changes at a reference abundance. These are back-transformed fitted values, not exact differences in arithmetic mean abundance. The continuous-outcome applet also allows users to explore assumptions about how much outcome variation is explained by covariates. All estimates are conditional on the selected reference variability and modeling assumptions.
 
+## Development
+
+This prototype was developed after I identified limitations in existing approaches used to plan microbiome studies, including outdated reference distributions, stool-only assumptions, inappropriate handling of unequal groups and longitudinal designs, and inflexible multiple-testing assumptions. I selected the reference populations and feature-specific filtering criteria, specified the statistical behavior and user requirements, and directed and validated the implementation through iterative AI-assisted development.
+
 ## How to set up
 
 Install R 4.5 or later, then open a terminal in this repository's directory. Install the required R packages once:
