@@ -1,0 +1,6 @@
+"id","dataset","feature_type","samples","empty_samples_excluded","input_features","observed_features","retained_features","excluded_observed_features","absent_features","excluded_total_features","sd_25","sd_50","sd_75"
+"hmp_tax_stool","HMP1-2 taxonomy stool","SGB",548,0,2452,1943,390,1553,509,2062,0.0110614061485475,0.017576587669201,0.033890177825294
+"hmp_tax_oral","HMP1-2 taxonomy oral","SGB",1284,1,2452,968,303,665,1484,2149,0.0232857400008939,0.0357573441801411,0.0525680649656254
+"hmp_tax_skin","HMP1-2 taxonomy skin","SGB",320,3,2452,951,59,892,1501,2393,0.0505436073039958,0.0747825514867552,0.111067174425975
+"hmp_tax_vaginal","HMP1-2 taxonomy vaginal","SGB",233,0,2452,543,31,512,1909,2421,0.0529014048514175,0.079953309704171,0.219931399992115
+"hmp_ec_stool","HMP1-2 ECs stool","EC",547,0,2487,2487,867,1620,0,1620,0.00473050499931356,0.0058695965616943,0.00702183391431955

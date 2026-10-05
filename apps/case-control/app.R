@@ -7,7 +7,7 @@ training <- load_applet_training()
 ui <- fluidPage(
   titlePanel("Case–control power • cross-sectional"),
   sidebarLayout(sidebarPanel(
-    selectInput("dataset","Training feature distributions",unique(training$key),selected="Original: HMP1-2 taxonomy stool"),
+    selectInput("dataset","Training feature distributions",unique(training$key),selected="Stool SGB"),
     numericInput("cases","Number of independent cases",100,min=2,step=1),
     numericInput("controls","Number of independent controls",100,min=2,step=1),
     sliderInput("target","Target power",min=.5,max=.99,value=.8,step=.01),

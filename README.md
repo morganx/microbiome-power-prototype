@@ -1,4 +1,4 @@
-# power-prototype
+# microbiome-power-prototype
 
 Two Shiny applets for feature-level microbiome power planning using only Human Microbiome Project phase 1-II reference profiles.
 
@@ -19,15 +19,9 @@ Open http://127.0.0.1:3850 for case-control or http://127.0.0.1:3851 for continu
 
 ## Reference data
 
-| Profile | Samples | Common features (≥20% prevalence) |
-|---|---:|---:|
-| Stool taxonomy | 548 | 260 |
-| Oral taxonomy | 1,284 | 231 |
-| Skin taxonomy | 320 | 26 |
-| Vaginal taxonomy | 233 | 9 |
-| Stool EC functions | 547 | 1,513 |
+The app offers five distributions: stool EC, stool SGB, oral SGB, skin SGB, and vaginal SGB. All use the same feature filters: prevalence ≥10% and mean relative abundance >0.01% among positive observations. Profiles are normalized before filtering. SDs exclude zeros. The app and grant summaries report detected and retained feature counts; excluded features are omitted from the default testing family. These thresholds are modeling choices, not universal requirements for linear models.
 
-Counts describe the supplied processed training tables. Profiles may include repeated visits and are not counts of independent participants. Common and more stringently filtered reference choices are available. Taxonomy filtering requires >10% prevalence and >0.1% mean relative abundance among positives; EC filtering requires >80% prevalence.
+The reference includes 548 stool taxonomy, 1,284 oral taxonomy, 320 skin taxonomy, 233 vaginal taxonomy, and 547 stool EC profiles. Profiles may include repeated visits and are not counts of independent participants.
 
 ## Rebuild and test
 

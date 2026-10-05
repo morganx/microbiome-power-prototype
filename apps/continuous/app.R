@@ -13,7 +13,7 @@ ui <- fluidPage(
     sidebarPanel(
       radioButtons("mode", "Analysis", c("Cross-sectional: one visit" = "cross", "Longitudinal: repeated-measures association" = "mixed"), selected = "cross"),
       selectInput("dataset", "Training feature SDs", unique(training$key),
-        selected = "Original: HMP1-2 taxonomy stool"),
+        selected = "Stool SGB"),
       numericInput("n", "Independent participants / complete pairs", 200, min = 4, step = 1),
       numericInput("covariates", "Adjustment coefficients (excluding outcome, intercept and time)", 2, min = 0, step = 1),
       helpText("Count K−1 coefficients for a K-level categorical covariate. Longitudinal mode adds a visit/time term automatically."),

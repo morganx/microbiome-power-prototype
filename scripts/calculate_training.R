@@ -4,7 +4,7 @@ strictly_above <- function(x, threshold) {
   x > threshold & (x - threshold) > 8 * .Machine$double.eps * pmax(abs(x), abs(threshold))
 }
 
-realistic_filter <- function(matrix_data, feature_type) {
+filter_features <- function(matrix_data, feature_type) {
   stopifnot(feature_type %in% c("SGB", "EC"),
             all(is.finite(matrix_data)), all(matrix_data >= 0))
   totals <- colSums(matrix_data)
@@ -18,9 +18,8 @@ realistic_filter <- function(matrix_data, feature_type) {
   prevalence <- positive_n / ncol(normalized)
   nonzero_mean <- rowSums(normalized) / positive_n
   nonzero_mean[positive_n == 0] <- NA_real_
-  prevalence_pass <- strictly_above(prevalence, if (feature_type == "EC") 0.80 else 0.10)
-  abundance_pass <- if (feature_type == "EC") rep(TRUE, nrow(normalized)) else
-    !is.na(nonzero_mean) & strictly_above(nonzero_mean, 0.001)
+  prevalence_pass <- prevalence >= 0.10
+  abundance_pass <- !is.na(nonzero_mean) & strictly_above(nonzero_mean, 0.0001)
   retained <- prevalence_pass & abundance_pass
   list(normalized = normalized, details = data.frame(
     feature = rownames(matrix_data), positive_samples = positive_n,
@@ -30,8 +29,8 @@ realistic_filter <- function(matrix_data, feature_type) {
   ))
 }
 
-summarize_realistic <- function(id, label, feature_type, matrix_data) {
-  filtered <- realistic_filter(matrix_data, feature_type)
+summarize_filtered <- function(id, label, feature_type, matrix_data) {
+  filtered <- filter_features(matrix_data, feature_type)
   details <- filtered$details
   # Compute variability only for retained features, never for excluded features.
   retained_sd <- apply(filtered$normalized[details$retained, , drop = FALSE], 1,
@@ -41,7 +40,7 @@ summarize_realistic <- function(id, label, feature_type, matrix_data) {
   details$transformed_sd <- NA_real_
   details$transformed_sd[details$retained] <- retained_sd
   details$dataset <- label
-  write.csv(details, paste0("data/derived/power.analysis.realistic_", id, "_features.csv"), row.names = FALSE)
+  write.csv(details, paste0("data/derived/filtered_", id, "_features.csv"), row.names = FALSE)
   data.frame(id = id, dataset = label, feature_type = feature_type,
     samples = ncol(filtered$normalized), empty_samples_excluded = ncol(matrix_data) - ncol(filtered$normalized),
     input_features = nrow(matrix_data),
@@ -56,12 +55,12 @@ summarize_realistic <- function(id, label, feature_type, matrix_data) {
 if (sys.nframe() == 0) {
   dir.create("data/derived", showWarnings = FALSE)
   results <- rbind(
-    summarize_realistic("hmp_tax_stool", "HMP1-2 taxonomy stool", "SGB", load_hmp_taxonomy_area("Gut")),
-    summarize_realistic("hmp_tax_oral", "HMP1-2 taxonomy oral", "SGB", load_hmp_taxonomy_area("Oral")),
-    summarize_realistic("hmp_tax_skin", "HMP1-2 taxonomy skin", "SGB", load_hmp_taxonomy_area("Skin")),
-    summarize_realistic("hmp_tax_vaginal", "HMP1-2 taxonomy vaginal", "SGB", load_hmp_taxonomy_area("Vaginal")),
-    summarize_realistic("hmp_ec_stool", "HMP1-2 ECs stool", "EC", load_hmp_ec_stool())
+    summarize_filtered("hmp_tax_stool", "HMP1-2 taxonomy stool", "SGB", load_hmp_taxonomy_area("Gut")),
+    summarize_filtered("hmp_tax_oral", "HMP1-2 taxonomy oral", "SGB", load_hmp_taxonomy_area("Oral")),
+    summarize_filtered("hmp_tax_skin", "HMP1-2 taxonomy skin", "SGB", load_hmp_taxonomy_area("Skin")),
+    summarize_filtered("hmp_tax_vaginal", "HMP1-2 taxonomy vaginal", "SGB", load_hmp_taxonomy_area("Vaginal")),
+    summarize_filtered("hmp_ec_stool", "HMP1-2 ECs stool", "EC", load_hmp_ec_stool())
   )
-  write.csv(results, "data/derived/power.analysis.realistic_training.csv", row.names = FALSE)
+  write.csv(results, "data/derived/filtered_training.csv", row.names = FALSE)
   print(results, row.names = FALSE)
 }
